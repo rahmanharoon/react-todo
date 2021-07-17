@@ -1,20 +1,37 @@
-import React from "react";
+import React, { useEffect } from "react";
 
-const Todo = ({ input, setInput, todos, setTodos }) => {
+const Todo = ({ input, setInput, todos, setTodos, editTodo, setEditTodo }) => {
   let today = new Date();
+  useEffect(() => {
+    if (editTodo) {
+      setInput(editTodo.title);
+    } else {
+      setInput("");
+    }
+  }, [setInput, editTodo]);
+  const updateTodo = (title, id, finish) => {
+    const newTodo = todos.map((todo) =>
+      todo.id === id ? { title, id, finish } : todo
+    );
+    setTodos(newTodo);
+    setEditTodo("");
+  };
   const onFormHandler = (e) => {
     e.preventDefault();
-    setTodos([
-      ...todos,
-      {
-        id: Math.floor(Math.random() * (today * 2)),
-        title: input,
-        finish: false,
-      },
-      setInput("")
-    ]);
+    if (!editTodo) {
+      setTodos([
+        ...todos,
+        {
+          id: Math.floor(Math.random() * (today * 2)),
+          title: input,
+          finish: false,
+        },
+      ]);
+      setInput("");
+    } else {
+      updateTodo(input, editTodo.id, editTodo.finish);
+    }
   };
-  console.log(todos);
   return (
     <form action="" onSubmit={onFormHandler}>
       <input
@@ -26,7 +43,7 @@ const Todo = ({ input, setInput, todos, setTodos }) => {
         onChange={(e) => setInput(e.target.value)}
       />
       <button className="button-add" type="submit">
-        Add
+        {editTodo ? "OK" : "Add"}
       </button>
     </form>
   );
