@@ -12,7 +12,7 @@ const TodoList = ({ todos, setTodos, setEditTodo }) => {
       todos.map((item) => {
         if (item.id === todo.id) {
           return { ...item, finish: !item.finish };
-        }
+        } else return console.log("Hi");
       })
     );
   };
@@ -24,6 +24,12 @@ const TodoList = ({ todos, setTodos, setEditTodo }) => {
     <div>
       {todos.map((todo) => (
         <li className="list-item" key={todo.id}>
+          <button
+            className="button-complete task-button"
+            onClick={() => handleComplete(todo)}
+          >
+            <IoIosDoneAll />
+          </button>
           <input
             type="text"
             className={`list ${todo.finish ? "complete" : ""}`}
@@ -31,12 +37,6 @@ const TodoList = ({ todos, setTodos, setEditTodo }) => {
             onChange={(e) => e.preventDefault()}
           />
           <div>
-            <button
-              className="button-complete task-button"
-              onClick={() => handleComplete(todo)}
-            >
-              <IoIosDoneAll />
-            </button>
             <button
               className="button-edit task-button"
               onClick={() => handleEdit(todo)}
