@@ -9,9 +9,9 @@ const Todo = ({ input, setInput, todos, setTodos, editTodo, setEditTodo }) => {
       setInput("");
     }
   }, [setInput, editTodo]);
-  const updateTodo = (title, id, finish) => {
+  const updateTodo = (title, id) => {
     const newTodo = todos.map((todo) =>
-      todo.id === id ? { title, id, finish } : todo
+      todo.id === id ? { title, id } : todo
     );
     setTodos(newTodo);
     setEditTodo("");
@@ -24,12 +24,11 @@ const Todo = ({ input, setInput, todos, setTodos, editTodo, setEditTodo }) => {
         {
           id: Math.floor(Math.random() * (today * 2)),
           title: input,
-          finish: false,
         },
       ]);
       setInput("");
     } else {
-      updateTodo(input, editTodo.id, editTodo.finish);
+      updateTodo(input, editTodo.id, editTodo);
     }
   };
   return (

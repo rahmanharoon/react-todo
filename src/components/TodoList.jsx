@@ -1,20 +1,10 @@
 import React from "react";
 import { MdModeEdit } from "react-icons/md";
-import { IoIosDoneAll } from "react-icons/io";
 import { AiFillDelete } from "react-icons/ai";
 
 const TodoList = ({ todos, setTodos, setEditTodo }) => {
   const handleDlete = ({ id }) => {
     setTodos(todos.filter((todo) => todo.id !== id));
-  };
-  const handleComplete = (todo) => {
-    setTodos(
-      todos.map((item) => {
-        if (item.id === todo.id) {
-          return { ...item, finish: !item.finish };
-        } else return console.log("Hi");
-      })
-    );
   };
   const handleEdit = ({ id }) => {
     const findTodo = todos.find((todo) => todo.id === id);
@@ -24,15 +14,9 @@ const TodoList = ({ todos, setTodos, setEditTodo }) => {
     <div>
       {todos.map((todo) => (
         <li className="list-item" key={todo.id}>
-          <button
-            className="button-complete task-button"
-            onClick={() => handleComplete(todo)}
-          >
-            <IoIosDoneAll />
-          </button>
           <input
             type="text"
-            className={`list ${todo.finish ? "complete" : ""}`}
+            className={"list"}
             value={todo.title}
             onChange={(e) => e.preventDefault()}
           />

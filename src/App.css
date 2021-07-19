@@ -86,13 +86,6 @@
   color: lightseagreen;
 }
 
-.complete {
-  text-decoration-style: solid;
-  text-decoration-line: line-through;
-  text-decoration-color: #ff6c6c;
-  opacity: 0.6;
-}
-
 .list {
   width: 230px;
   background-color: #fff;
